@@ -20,7 +20,7 @@ public class StashPullRequestResponseValueRepository {
     @JsonIgnore
     private StashPullRequestResponseValueRepositoryCommit commit;
 
-    private String latestChangeset;
+    private String latestCommit;
     private String id;
 
 
@@ -66,16 +66,26 @@ public class StashPullRequestResponseValueRepository {
         return branchName;
     }
 
-    @JsonProperty("latestChangeset")
-    public String getLatestChangeset() {
-        return latestChangeset;
+    @JsonProperty("latestCommit")
+    public String getLatestCommit() {
+        return latestCommit;
+    }
+
+    @JsonProperty("latestCommit")
+    public void setLatestCommit(String latestCommit) {
+        this.latestCommit = latestCommit;
+        this.commit = new StashPullRequestResponseValueRepositoryCommit();
+        this.commit.setHash(latestCommit);
     }
 
     @JsonProperty("latestChangeset")
-    public void setLatestChangeset(String latestChangeset) { //TODO
-        this.latestChangeset = latestChangeset;
-        this.commit = new StashPullRequestResponseValueRepositoryCommit();
-        this.commit.setHash(latestChangeset);
+    public String getLatestChangeset() {
+        return getLatestCommit();
+    }
+
+    @JsonProperty("latestChangeset")
+    public void setLatestChangeset(String latestCommit) {
+        setLatestCommit(latestCommit);
     }
 
     @JsonProperty("repository")
